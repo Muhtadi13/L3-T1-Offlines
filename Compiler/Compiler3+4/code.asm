@@ -1,0 +1,1223 @@
+.MODEL SMALL
+.STACK 100H
+
+.DATA
+arr DW 5 DUP (0000H)
+a DW 1 DUP (0000H)
+NUMBER DB "00000$"
+
+.CODE
+		;Line No: 2
+
+f PROC
+
+	PUSH BP
+	MOV BP , SP
+		;Line No: 4
+	PUSH BP
+	MOV BX, 8
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L9:
+		;Line No: 5
+	PUSH BP
+	MOV BX, 6
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L8:
+		;Line No: 6
+	PUSH BP
+	MOV BX, 4
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L7:
+		;Line No: 7
+	MOV CX, 441
+	PUSH CX
+	MOV CX, 1
+	LEA SI, arr
+	ADD SI, CX
+	ADD SI, CX
+	PUSH BP
+	MOV BP, SI
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L6:
+		;Line No: 8
+	MOV CX, 555
+	PUSH CX
+	MOV CX, 0
+	LEA SI, arr
+	ADD SI, CX
+	ADD SI, CX
+	PUSH BP
+	MOV BP, SI
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L5:
+		;Line No: 9
+	MOV CX, 1
+	LEA SI, arr
+	ADD SI, CX
+	ADD SI, CX
+	PUSH BP
+	MOV BP, SI
+	MOV CX, [BP]
+	POP BP
+	PUSH CX
+	PUSH BP
+	MOV BX, 6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L4:
+		;Line No: 10
+	PUSH BP
+	MOV BX, 6
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L3:
+		;Line No: 11
+	MOV CX, 0
+	LEA SI, arr
+	ADD SI, CX
+	ADD SI, CX
+	PUSH BP
+	MOV BP, SI
+	MOV CX, [BP]
+	POP BP
+	MOV DX,CX
+	JMP L1
+L2:
+L1:
+
+	MOV SP , BP
+	POP BP
+	RET 6
+
+f ENDP
+		;Line No: 13
+
+recursive PROC
+
+	PUSH BP
+	MOV BP , SP
+		;Line No: 15
+	PUSH BP
+	MOV BX, 4
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	MOV CX, 1
+	POP AX
+	CMP AX,CX
+	JE L14
+	JMP L13
+L14:
+		;Line No: 16
+	MOV CX, 1
+	MOV DX,CX
+	JMP L10
+L13:
+		;Line No: 17
+	PUSH BP
+	MOV BX, 4
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	MOV CX, 0
+	POP AX
+	CMP AX,CX
+	JE L15
+	JMP L12
+L15:
+		;Line No: 18
+	MOV CX, 0
+	MOV DX,CX
+	JMP L10
+L12:
+		;Line No: 19
+	PUSH BP
+	MOV BX, 4
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	MOV CX, 1
+	POP AX
+	SUB AX, CX
+	MOV CX, AX
+	PUSH CX
+	CALL recursive
+	MOV CX, DX
+
+	PUSH CX
+	PUSH BP
+	MOV BX, 4
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	MOV CX, 2
+	POP AX
+	SUB AX, CX
+	MOV CX, AX
+	PUSH CX
+	CALL recursive
+	MOV CX, DX
+	POP AX
+	ADD CX, AX
+	MOV DX,CX
+	JMP L10
+L11:
+L10:
+
+	MOV SP , BP
+	POP BP
+	RET 2
+
+recursive ENDP
+		;Line No: 21
+
+v PROC
+
+	PUSH BP
+	MOV BP , SP
+		;Line No: 23
+	MOV CX, 3
+	MOV a , CX
+L19:
+		;Line No: 24
+	MOV CX ,a
+	CMP CX , 0
+	JE L18
+	JMP L20
+L20:
+		;Line No: 25
+		;Line No: 26
+
+	SUB SP , 2
+L23:
+		;Line No: 27
+	MOV CX, 1
+	PUSH CX
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L22:
+		;Line No: 28
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L21:
+L18:
+		;Line No: 30
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L17:
+L16:
+
+	MOV SP , BP
+	POP BP
+	RET
+
+v ENDP
+		;Line No: 32
+
+main PROC
+
+	MOV AX , @DATA
+	MOV DS , AX
+
+	PUSH BP
+	MOV BP , SP
+		;Line No: 34
+
+	SUB SP , 18
+L74:
+		;Line No: 35
+	MOV CX, 5
+	PUSH CX
+	PUSH BP
+	MOV BX, -8
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L73:
+		;Line No: 36
+	CALL v
+	MOV CX, DX
+L72:
+		;Line No: 37
+	PUSH BP
+	MOV BX, -8
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L71:
+		;Line No: 38
+	MOV CX, 0
+	PUSH CX
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L75:
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	MOV CX, 5
+	POP AX
+	CMP AX,CX
+	JL L76
+	JMP L70
+L76:
+		;Line No: 39
+		;Line No: 40
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	MOV CX, 1
+	POP AX
+	ADD CX, AX
+	PUSH CX
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	PUSH BP
+	MOV BX, CX
+	ADD BX, BX
+	ADD BX, -10
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L78:
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	MOV AX, CX
+	INC CX
+	MOV [BP], CX
+	POP BP
+	MOV CX, AX
+
+	JMP L75
+	L77:
+L70:
+		;Line No: 42
+	MOV CX, 4
+	PUSH CX
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L69:
+		;Line No: 43
+L79:
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	MOV AX, CX
+	DEC CX
+	MOV [BP], CX
+	POP BP
+	MOV CX, AX
+	CMP CX , 0
+	JE L68
+	JMP L80
+L80:
+		;Line No: 44
+		;Line No: 45
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	PUSH BP
+	MOV BX, CX
+	ADD BX, BX
+	ADD BX, -10
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	PUSH CX
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L82:
+		;Line No: 46
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L81:
+
+	JMP L79
+L68:
+		;Line No: 48
+	MOV CX, 2
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L67:
+		;Line No: 49
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	MOV CX, 0
+	POP AX
+	CMP AX,CX
+	JG L84
+	JMP L83
+L84:
+		;Line No: 50
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	MOV AX, CX
+	INC CX
+	MOV [BP], CX
+	POP BP
+	MOV CX, AX
+	JMP L66
+L83:
+		;Line No: 52
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	MOV AX, CX
+	DEC CX
+	MOV [BP], CX
+	POP BP
+	MOV CX, AX
+L66:
+		;Line No: 53
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L65:
+		;Line No: 54
+	MOV CX, 2
+	NEG CX
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L64:
+		;Line No: 55
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	MOV CX, 0
+	POP AX
+	CMP AX,CX
+	JL L86
+	JMP L85
+L86:
+		;Line No: 56
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	MOV AX, CX
+	INC CX
+	MOV [BP], CX
+	POP BP
+	MOV CX, AX
+	JMP L63
+L85:
+		;Line No: 58
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	MOV AX, CX
+	DEC CX
+	MOV [BP], CX
+	POP BP
+	MOV CX, AX
+L63:
+		;Line No: 59
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L62:
+		;Line No: 60
+	MOV CX, 121
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L61:
+		;Line No: 61
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	NEG CX
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L60:
+		;Line No: 62
+	MOV CX, 5
+	PUSH CX
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L59:
+		;Line No: 63
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	POP AX
+	ADD CX, AX
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L58:
+		;Line No: 64
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L57:
+		;Line No: 65
+	MOV CX, 4
+	NEG CX
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L56:
+		;Line No: 66
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	PUSH CX
+	MOV CX, 4
+	POP AX
+	IMUL CX
+	MOV CX, AX
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L55:
+		;Line No: 67
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L54:
+		;Line No: 68
+	MOV CX, 19
+	PUSH CX
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L53:
+		;Line No: 69
+	MOV CX, 4
+	PUSH CX
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L52:
+		;Line No: 70
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	PUSH CX
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	POP AX
+	CWD
+	IDIV CX
+	MOV CX, AX
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L51:
+		;Line No: 71
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L50:
+		;Line No: 72
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	PUSH CX
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	POP AX
+	CWD
+	IDIV CX
+	MOV CX, DX
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L49:
+		;Line No: 73
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L48:
+		;Line No: 74
+	MOV CX, 111
+	PUSH CX
+	MOV CX, 222
+	PUSH CX
+	MOV CX, 333
+	PUSH CX
+	CALL f
+	MOV CX, DX
+
+	PUSH CX
+	MOV CX, 444
+	POP AX
+	SUB AX, CX
+	MOV CX, AX
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L47:
+		;Line No: 75
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L46:
+		;Line No: 76
+	MOV CX, 5
+	PUSH CX
+	CALL recursive
+	MOV CX, DX
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L45:
+		;Line No: 77
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L44:
+		;Line No: 78
+	MOV CX, 2
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L43:
+		;Line No: 79
+	MOV CX, 1
+	PUSH CX
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L42:
+		;Line No: 80
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	POP AX
+	CMP AX, 0
+	JE L88
+	JMP L89
+L88:
+	JCXZ L90
+L89:
+	MOV CX, 1
+	JMP L91
+L90:
+	MOV CX, 0
+L91:
+	PUSH CX
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L41:
+		;Line No: 81
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L40:
+		;Line No: 82
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	POP AX
+	CMP AX, 0
+	JE L93
+	JCXZ L93
+	JMP L94
+L93:
+	MOV CX, 0
+	JMP L95
+L94:
+	MOV CX, 1
+L95:
+	PUSH CX
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L39:
+		;Line No: 83
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L38:
+		;Line No: 84
+	MOV CX, 2
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L37:
+		;Line No: 85
+	MOV CX, 0
+	PUSH CX
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L36:
+		;Line No: 86
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	POP AX
+	CMP AX, 0
+	JE L97
+	JMP L98
+L97:
+	JCXZ L99
+L98:
+	MOV CX, 1
+	JMP L100
+L99:
+	MOV CX, 0
+L100:
+	PUSH CX
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L35:
+		;Line No: 87
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L34:
+		;Line No: 88
+	PUSH BP
+	MOV BX, -2
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+
+	PUSH CX
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	POP AX
+	CMP AX, 0
+	JE L102
+	JCXZ L102
+	JMP L103
+L102:
+	MOV CX, 0
+	JMP L104
+L103:
+	MOV CX, 1
+L104:
+	PUSH CX
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L33:
+		;Line No: 89
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L32:
+		;Line No: 90
+	PUSH BP
+	MOV BX, -6
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	JCXZ L106
+	MOV CX,0
+	JMP L105
+L106:
+	MOV CX,1
+L105:
+	PUSH CX
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L31:
+		;Line No: 91
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L30:
+		;Line No: 92
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	MOV CX, [BP]
+	POP BP
+	JCXZ L108
+	MOV CX,0
+	JMP L107
+L108:
+	MOV CX,1
+L107:
+	PUSH CX
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L29:
+		;Line No: 93
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L28:
+		;Line No: 94
+	MOV CX, 12
+
+	PUSH CX
+	MOV CX, 2
+	PUSH CX
+	MOV CX, 89
+	POP AX
+	CWD
+	IDIV CX
+	MOV CX, AX
+	PUSH CX
+	MOV CX, 3
+
+	PUSH CX
+	MOV CX, 33
+	POP AX
+	SUB AX, CX
+	MOV CX, AX
+
+	PUSH CX
+	MOV CX, 64
+	PUSH CX
+	MOV CX, 2
+	POP AX
+	IMUL CX
+	MOV CX, AX
+	POP AX
+	ADD CX, AX
+	POP AX
+	CWD
+	IDIV CX
+	MOV CX, DX
+	POP AX
+	ADD CX, AX
+
+	PUSH CX
+	MOV CX, 3
+	POP AX
+	SUB AX, CX
+	MOV CX, AX
+
+	PUSH CX
+	MOV CX, 3
+
+	PUSH CX
+	MOV CX, 59
+	PUSH CX
+	MOV CX, 9
+	POP AX
+	CWD
+	IDIV CX
+	MOV CX, AX
+	PUSH CX
+	MOV CX, 2
+	POP AX
+	IMUL CX
+	MOV CX, AX
+	POP AX
+	ADD CX, AX
+
+	PUSH CX
+	MOV CX, 4
+	POP AX
+	SUB AX, CX
+	MOV CX, AX
+	POP AX
+	ADD CX, AX
+	PUSH CX
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	POP AX
+	POP CX
+	MOV [BP], CX
+	MOV BP, AX
+L27:
+		;Line No: 95
+	PUSH BP
+	MOV BX, -4
+	ADD BP, BX
+	MOV AX, [BP]
+	CALL print_output
+	CALL new_line
+	POP BP
+L26:
+		;Line No: 97
+	MOV CX, 0
+	MOV DX,CX
+	JMP L24
+L25:
+L24:
+
+	MOV SP , BP
+	POP BP
+
+	MOV AH , 4CH
+	INT 21H
+
+MAIN ENDP
+new_line proc
+	push ax
+	push dx
+	mov ah,2
+	mov dl,0Dh
+	int 21h
+	mov ah,2
+	mov dl,0Ah
+	int 21h
+	pop dx
+	pop ax
+	ret
+	new_line endp
+ print_output proc  ;print what is in ax
+	push ax
+	push bx
+	push cx
+	push dx
+	push si
+	lea si,number
+	mov bx,10
+	add si,4
+	cmp ax,0
+	jnge negate
+	print:
+	xor dx,dx
+	div bx
+	mov [si],dl
+	add [si],'0'
+	dec si
+	cmp ax,0
+	jne print
+	inc si
+	lea dx,si
+	mov ah,9
+	int 21h
+	pop si
+	pop dx
+	pop cx
+	pop bx
+	pop ax
+	ret
+	negate:
+	push ax
+	mov ah,2
+	mov dl,'-'
+	int 21h
+	pop ax
+	neg ax
+	jmp print
+print_output endp
+END MAIN
